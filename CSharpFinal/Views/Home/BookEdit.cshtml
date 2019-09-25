@@ -1,0 +1,12 @@
+﻿@using PresentationLayer.Models;
+@model BookEditModel
+    <form asp-action="BookEdit2" asp-route-id=@Model>
+        <h1>Edit Book</h1>
+        <input name="Id" type="hidden" value="@Model.Id" />
+        <input name="AuthorId" value="@Model.AuthorId" />
+        <input name="Name" value="@Model.Name" />
+        <input name="Price" value="@Model.Price" />
+        <input type="submit" />
+    </form>
+
+
