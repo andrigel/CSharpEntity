@@ -1,0 +1,13 @@
+﻿@using PresentationLayer.Models;
+@model LogEditModel
+    <form asp-action="LogEdit2" asp-route-id=@Model>
+        <h1>Edit Log</h1>
+        <input name="Id" type="hidden" value="@Model.Id" />
+        <input name="BookId" value="@Model.BookId" />
+        <input name="ReaderId" value="@Model.ReaderId" />
+        <input name="DateOfIssue" value="@Model.DateOfIssue" />
+        <input name="DateOfReturn" value="@Model.DateOfReturn" />
+        <input type="submit" />
+    </form>
+
+

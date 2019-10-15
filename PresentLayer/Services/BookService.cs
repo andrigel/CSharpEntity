@@ -31,7 +31,7 @@ namespace PresentationLayer.Services
         public BookViewModel BookDBToViewModelById(int bookId)
         {
             var _book = _dataManager.Books.GetBookById(bookId);
-            AuthorViewModel _author = _authorService.AuthorDBModelToViewById(_book.AuthorId);
+            AuthorViewModel _author = _authorService.AuthorDBModelToViewById(_book.Author.Id);
             return new BookViewModel() { Book = _book, Author = _author };
         }
         public BookEditModel GetBookEditModel(int bookId = 0)
@@ -43,7 +43,7 @@ namespace PresentationLayer.Services
                 {
                     Id = _bookDB.Id,
                     Name = _bookDB.Name,
-                    AuthorId = _bookDB.AuthorId,
+                    AuthorId = _bookDB.Author.Id,
                     Price = _bookDB.Price
                 };
                 return _bookEditModel;
@@ -62,7 +62,7 @@ namespace PresentationLayer.Services
                 _bookDbModel = new Book();
             }
             _bookDbModel.Name = bookEditModel.Name;
-            _bookDbModel.AuthorId = bookEditModel.AuthorId;
+            _bookDbModel.Author = _dataManager.Authors.GetAuthorById(bookEditModel.AuthorId);
             _bookDbModel.Price = bookEditModel.Price;
 
             _dataManager.Books.SaveBook(_bookDbModel);

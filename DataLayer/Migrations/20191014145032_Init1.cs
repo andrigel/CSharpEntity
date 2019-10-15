@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
 {
-    public partial class Init0 : Migration
+    public partial class Init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace DataLayer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<int>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: true),
                     Price = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -59,14 +59,14 @@ namespace DataLayer.Migrations
                         column: x => x.AuthorId,
                         principalTable: "author",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "log",
                 columns: table => new
                 {
-                    LogId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ReaderId = table.Column<int>(nullable: true),
                     BookId = table.Column<int>(nullable: true),
@@ -75,7 +75,7 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_log", x => x.LogId);
+                    table.PrimaryKey("PK_log", x => x.Id);
                     table.ForeignKey(
                         name: "FK_log_book_BookId",
                         column: x => x.BookId,

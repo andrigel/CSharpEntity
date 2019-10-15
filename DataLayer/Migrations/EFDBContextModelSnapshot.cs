@@ -40,13 +40,15 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorId");
+                    b.Property<int?>("AuthorId");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Price");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("book");
                 });
@@ -99,15 +101,25 @@ namespace DataLayer.Migrations
                     b.ToTable("reader");
                 });
 
+            modelBuilder.Entity("DataLayer.Entityes.Book", b =>
+                {
+                    b.HasOne("DataLayer.Entityes.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
             modelBuilder.Entity("DataLayer.Entityes.Log", b =>
                 {
                     b.HasOne("DataLayer.Entityes.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId");
+                        .WithMany("Logs")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DataLayer.Entityes.Reader", "Reader")
-                        .WithMany()
-                        .HasForeignKey("ReaderId");
+                        .WithMany("Logs")
+                        .HasForeignKey("ReaderId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

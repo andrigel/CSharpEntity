@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(EFDBContext))]
-    [Migration("20190924080256_Init5")]
-    partial class Init5
+    [Migration("20191014145032_Init1")]
+    partial class Init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,13 +42,15 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorId");
+                    b.Property<int?>("AuthorId");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Price");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("book");
                 });
@@ -99,6 +101,13 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("reader");
+                });
+
+            modelBuilder.Entity("DataLayer.Entityes.Book", b =>
+                {
+                    b.HasOne("DataLayer.Entityes.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.Log", b =>

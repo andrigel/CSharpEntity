@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AdoNet;
 
 namespace BuissnesLayer.Implementations
 {
@@ -19,23 +20,25 @@ namespace BuissnesLayer.Implementations
         public void DeleteBook(Book book)
         {
             if (book != null)
-            {
-                Book _book = new Book() { Id = book.Id };
-                    context.book.Attach(_book);
-                    context.Entry(_book).State = EntityState.Deleted;
-                    context.ChangeTracker.DetectChanges();
-                    context.SaveChanges();
-            }
+             {
+                /*context.Entry(book).State = EntityState.Deleted;
+                 context.SaveChanges();*/
+                context.book.Remove(book);
+                context.SaveChanges();
+             }
+          //AdoNetTools.DeleteBook(Id);
         }
-
-        public IEnumerable<Book> GetAllBooks()
+        public IEnumerable<Book> GetAllBooks(bool IncludeAuthors=false)
         {
-                return context.book.ToList();
+            if (IncludeAuthors)
+                return context.Set<Book>().Include(x => x.Author).AsNoTracking().ToList();
+            else
+            return context.book.ToList();
         }
 
         public Book GetBookById(int id)
         {
-                return context.book.FirstOrDefault(x => x.Id == id);
+                return context.Set<Book>().Include(x => x.Author).FirstOrDefault(x => x.Id == id);
         }
 
         public void SaveBook(Book book)

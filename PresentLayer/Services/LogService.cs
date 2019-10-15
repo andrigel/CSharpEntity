@@ -32,7 +32,7 @@ namespace PresentationLayer.Services
         {
             var _log = _dataManager.Logs.GetLogById(logId, true);
 
-            ReaderViewModel _reader = _readerService.ReaderDBModelToViewById(_log.Reader.Id);
+            ReaderViewModel _reader = _readerService.ReaderDBModelToViewModelById(_log.Reader.Id);
             BookViewModel _book = _bookService.BookDBToViewModelById(_log.Book.Id);
             return new LogViewModel() { Log = _log, Reader = _reader, Book = _book };
         }

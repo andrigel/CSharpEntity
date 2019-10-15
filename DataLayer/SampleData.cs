@@ -24,14 +24,14 @@ namespace DataLayer
             }
             if (!context.book.Any())
             {
-                context.book.Add(new Book { Name ="Город потеряных душ",Price = 200, AuthorId = 7 });
-                context.book.Add(new Book { Name = "Волк с Уолл-стритт", Price = 150, AuthorId = 6 });
-                context.book.Add(new Book { Name = "Страна радости", Price = 400, AuthorId = 1 });
-                context.book.Add(new Book { Name = "Мир глазами кота Боба", Price = 200, AuthorId = 4 });
-                context.book.Add(new Book { Name = "Зов кукушки", Price = 150, AuthorId = 2 });
-                context.book.Add(new Book { Name = "Поющие в терновнике", Price = 100, AuthorId = 3 });
-                context.book.Add(new Book { Name = "1984", Price = 200, AuthorId = 5 });
-                context.book.Add(new Book { Name = "Оно", Price = 300, AuthorId = 1 });
+                context.book.Add(new Book { Name ="Город потеряных душ",Price = 200, Author = context.author.Find(7) });
+                context.book.Add(new Book { Name = "Волк с Уолл-стритт", Price = 150, Author = context.author.Find(6) });
+                context.book.Add(new Book { Name = "Страна радости", Price = 400, Author = context.author.Find(1) });
+                context.book.Add(new Book { Name = "Мир глазами кота Боба", Price = 200, Author = context.author.Find(4) });
+                context.book.Add(new Book { Name = "Зов кукушки", Price = 150, Author = context.author.Find(2) });
+                context.book.Add(new Book { Name = "Поющие в терновнике", Price = 100, Author = context.author.Find(3) });
+                context.book.Add(new Book { Name = "1984", Price = 200, Author = context.author.Find(5) });
+                context.book.Add(new Book { Name = "Оно", Price = 300, Author = context.author.Find(1) });
                 context.SaveChanges();
             }
             if(!context.reader.Any())

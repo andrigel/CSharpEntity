@@ -1,0 +1,16 @@
+﻿@using PresentationLayer.Models;
+@model ReaderEditModel
+    <form asp-action="ReaderEdit2" asp-route-id=@Model>
+        <h1>Edit Reader</h1>
+        <input name="Id" type="hidden" value="@Model.Id" />
+        <input name="Name" value="@Model.Name" />
+        <input name="Surname" value="@Model.Surname" />
+        <input name="Patronymic" value="@Model.Patronymic" />
+        <input name="Region" value="@Model.Region" />
+        <input name="District" value="@Model.District" />
+        <input name="TicketNumber" value="@Model.TicketNumber" />
+        <input name="Telephone" value="@Model.Telephone" />
+        <input type="submit" />
+    </form>
+
+

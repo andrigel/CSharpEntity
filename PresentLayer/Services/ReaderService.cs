@@ -3,71 +3,80 @@ using DataLayer.Entityes;
 using PresentationLayer.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace PresentationLayer.Services
 {
     public class ReaderService
     {
-        private DataManager dataManager;
+        private DataManager _dataManager;
         public ReaderService(DataManager dataManager)
         {
-            this.dataManager = dataManager;
+            this._dataManager = dataManager;
         }
 
-        public ReaderViewModel ReaderDBModelToViewById(int readerId)
+        public List<ReaderViewModel> GetReadersList()
         {
-            var _model = new ReaderViewModel()
+            var _readers = _dataManager.Readers.GetAllReaders();
+            List<ReaderViewModel> _modelsList = new List<ReaderViewModel>();
+            foreach (var item in _readers)
             {
-                Reader = dataManager.Readers.GetReaderById(readerId),
-            };
-            return _model;
+                _modelsList.Add(ReaderDBModelToViewModelById(item.Id));
+            }
+            return _modelsList;
         }
 
-        public ReaderEditModel GetReaderEditModel(int readerId)
+        public ReaderViewModel ReaderDBModelToViewModelById(int readerId)
         {
-            var _dbModel = dataManager.Readers.GetReaderById(readerId);
-            var _editModel = new ReaderEditModel()
-            {
-                Id = _dbModel.Id,
-                Surname = _dbModel.Surname,
-                Name = _dbModel.Name,
-                Patronymic = _dbModel.Patronymic,
-                Region = _dbModel.Region,
-                District = _dbModel.District,
-                TicketNumber = _dbModel.TicketNumber,
-                Telephone = _dbModel.Telephone,
-            };
-            return _editModel;
+            var _reader = _dataManager.Readers.GetReaderById(readerId);
+            return new ReaderViewModel() { Reader = _reader };
         }
-
-        public ReaderViewModel SaveReaderEditModelToDb(ReaderEditModel editModel)
+        public ReaderEditModel GetReaderEditModel(int readerId = 0)
         {
-            Reader reader;
-            if (editModel.Id != 0)
+            if (readerId != 0)
             {
-                reader = dataManager.Readers.GetReaderById(editModel.Id);
+                var _readerDB = _dataManager.Readers.GetReaderById(readerId);
+                var _readerEditModel = new ReaderEditModel()
+                {
+                    Id = _readerDB.Id,
+                    Name = _readerDB.Name,
+                    Surname = _readerDB.Surname,
+                    Patronymic = _readerDB.Patronymic,
+                    Region = _readerDB.Region,
+                    District = _readerDB.District,
+                    TicketNumber = _readerDB.TicketNumber,
+                    Telephone = _readerDB.Telephone
+                };
+                return _readerEditModel;
+            }
+            else { return new ReaderEditModel() { }; }
+        }
+        public ReaderViewModel SaveReaderEditModelToDb(ReaderEditModel readerEditModel)
+        {
+            Reader _readerDbModel;
+            if (readerEditModel.Id != 0)
+            {
+                _readerDbModel = _dataManager.Readers.GetReaderById(readerEditModel.Id);
             }
             else
             {
-                reader = new Reader();
+                _readerDbModel = new Reader();
             }
-            reader.Id = editModel.Id;
-            reader.Surname = editModel.Surname;
-            reader.Name = editModel.Name;
-            reader.Patronymic = editModel.Patronymic;
-            reader.Region = editModel.Region;
-            reader.District = editModel.District;
-            reader.TicketNumber = editModel.TicketNumber;
-            reader.Telephone = editModel.Telephone;
-            dataManager.Readers.SaveReader(reader);
-            return ReaderDBModelToViewById(reader.Id);
-        }
-        public ReaderEditModel CreateNewReaderEditModel()
-        {
-            return new ReaderEditModel() {};
+            _readerDbModel.Id = readerEditModel.Id;
+            _readerDbModel.Name = readerEditModel.Name;
+            _readerDbModel.Surname = readerEditModel.Surname;
+            _readerDbModel.District = readerEditModel.District;
+            _readerDbModel.TicketNumber = readerEditModel.TicketNumber;
+            _readerDbModel.Telephone = readerEditModel.Telephone;
+
+            _dataManager.Readers.SaveReader(_readerDbModel);
+
+            return ReaderDBModelToViewModelById(_readerDbModel.Id);
         }
 
+        public ReaderEditModel CreateNewReaderEditModel()
+        {
+            return new ReaderEditModel() { };
+        }
     }
 }

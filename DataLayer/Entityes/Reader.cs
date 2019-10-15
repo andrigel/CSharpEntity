@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace DataLayer.Entityes
 {
     public class Reader
     {
+        
         public int Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
@@ -15,5 +17,6 @@ namespace DataLayer.Entityes
         public string District { get; set; }
         public int TicketNumber { get; set; }
         public string Telephone { get; set; }
+        public List<Log> Logs { get; set; }
     }
 }

@@ -8,7 +8,6 @@
 
 <p>
     <a asp-action="BookCreate">Create New</a>
-    <a asp-action="NextTable">GoNextTable</a>
 </p>
 <table class="table">
     <thead>
@@ -35,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AuthorId)
+                @Html.DisplayFor(modelItem => item.Author.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -45,7 +44,7 @@
             </td>
             <td>
                 <a asp-action="BookEdit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="BookDelete" asp-route-id="@item">Delete</a>
+                <a asp-action="BookDelete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

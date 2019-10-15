@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuissnesLayer", "BuissnesLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLayer", "PresentLayer\PresentationLayer.csproj", "{A4EC8BB4-D24C-4B76-ADBB-22D650341EDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetTools", "AdoNetVersion\AdoNetTools.csproj", "{422AB485-B5EE-4A3C-8AC5-5F3CE478FB7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A4EC8BB4-D24C-4B76-ADBB-22D650341EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4EC8BB4-D24C-4B76-ADBB-22D650341EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4EC8BB4-D24C-4B76-ADBB-22D650341EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422AB485-B5EE-4A3C-8AC5-5F3CE478FB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422AB485-B5EE-4A3C-8AC5-5F3CE478FB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422AB485-B5EE-4A3C-8AC5-5F3CE478FB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422AB485-B5EE-4A3C-8AC5-5F3CE478FB7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

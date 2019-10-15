@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AdoNet;
 
 namespace BuissnesLayer.Implementations
 {
@@ -19,8 +20,14 @@ namespace BuissnesLayer.Implementations
 
         public void DeleteAuthor(Author author)
         {
-            context.author.Remove(author);
-            context.SaveChanges();
+            if (author != null)
+            {
+                /*context.Entry(book).State = EntityState.Deleted;
+                 context.SaveChanges();*/
+                context.author.Remove(author);
+                context.SaveChanges();
+            }
+            //AdoNetTools.DeleteAuthor(id);
         }
 
         public IEnumerable<Author> GetAllAuthors()
@@ -30,7 +37,7 @@ namespace BuissnesLayer.Implementations
 
         public Author GetAuthorById(int id)
         {
-            return context.author.FirstOrDefault(x => x.Id == id);
+            return context.author.Include(a => a.Books).FirstOrDefault(x => x.Id == id);
         }
 
         public void SaveAuthor(Author author)

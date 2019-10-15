@@ -25,4 +25,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdoNetVersion\AdoNetTools.csproj" />
+  </ItemGroup>
+
 </Project>

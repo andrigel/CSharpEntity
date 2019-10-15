@@ -7,10 +7,10 @@ namespace BuissnesLayer.Interfaces
 {
     public interface IBookRepository
     {
-        IEnumerable<Book> GetAllBooks();
+        IEnumerable<Book> GetAllBooks(bool IncludeAuthors = false);
         Book GetBookById(int id);
         void SaveBook(Book archive);
-        void DeleteBook(Book archive);
+        void DeleteBook(Book book);
 
     }
 }

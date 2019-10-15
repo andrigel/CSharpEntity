@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(EFDBContext))]
-    [Migration("20190922122231_Init2")]
-    partial class Init2
+    [Migration("20191015065930_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,19 +106,22 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DataLayer.Entityes.Book", b =>
                 {
                     b.HasOne("DataLayer.Entityes.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("DataLayer.Entityes.Log", b =>
                 {
                     b.HasOne("DataLayer.Entityes.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId");
+                        .WithMany("Logs")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DataLayer.Entityes.Reader", "Reader")
-                        .WithMany()
-                        .HasForeignKey("ReaderId");
+                        .WithMany("Logs")
+                        .HasForeignKey("ReaderId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }
