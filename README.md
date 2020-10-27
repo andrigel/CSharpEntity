@@ -1,5 +1,5 @@
 # Entity Framework Core project
-My university project that realized a database of book's library.
+My university project that realized a site with CRUD functional for a book's database.
 
 ## Tecnologies
 1. .Net Core 2.2
